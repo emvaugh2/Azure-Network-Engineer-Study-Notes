@@ -77,7 +77,7 @@ At the VNet level, default DNS configuration is part of the DHCP assignments mad
 
 Two days to link VNets to private zones: 1.) Each VNet can link to one private DNS zone for registration with up to 100 Vnets linked to the same private DNS zone. 2.) You can link a VNet to each private zone with each VNet being able to link to up to 1,000 private DNS zones. 
 
-Make sure you understand this conditional forwarding stuff. 
+Make sure you understand this conditional forwarding stuff. Use the lab to finish off this section. 
 
 
 
