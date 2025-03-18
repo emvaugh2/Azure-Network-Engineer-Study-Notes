@@ -2,14 +2,21 @@
 
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
+## 03.11.2025
+**Today's Topic**
+* Introduction to Azure Virtual Networks
+
+
 ## 03.10.2025
 **Today's Topic**
 * Introduction to Azure Virtual Networks
 
 ________________________
-Design name resolution for your virtual network
+Implement virtual network traffic routing
 
-Long work day. Another long day. Trippin. Fell off. 
+Azure automatically creates a route table for each subnet within an Azure virtual network and adds system default routes to the table. System routes are just default routes. You can't delete them but you can override them with custom routes (User-Defined Routes). Each route contains an address prefix and a next hop type. When traffic leaving a subnet is sent to an IP address within the address prefix of a route, the route that contains the prefix is the route Azure uses. 
+
+[!Image](AZ700-1.PNG)
 
 
 ## 03.09.2025
@@ -18,6 +25,17 @@ Long work day. Another long day. Trippin. Fell off.
 
 ________________________
 Design name resolution for your virtual network
+Enable cross-virtual network connectivity
+
+We configured an Azure private DNS zone for our networks in a simulation lab. We named our domain `Contoso.com` and then inside the Azure private DNS resource, we had to add the Vnets that we wanted to use the private DNS service. We also selected Auto-enable so any device that's added onto this Vnet will automatically have it's name added to the DNS records. You can check the DNS records to see which devices are registered with their private IP address. Afterwards, we downloaded the RDP file and pinged one of the VMs from the source VM by name. The name was resolved to the private IP address. How cool is that???
+
+Also, to peer to VNets together, go to a Vnet and click on Peerings. Once you get into the Add screen, you need to name the peering link for the VNet you're currently on and for the remote VNet. A common naming convention is `<LocalVnetName>-to-<RemoteVnetName>` for the local Vnet and then the reverse for the remote Vnet so `<RemoteVnetName>-to-<LocalVnetName>`. Now choose the remote VNet you're peering to and create the peering. This will automatically add the peer link to the other VNet as well. I thought in the past, you had to manually do this process but I guess that's not the case. Now, resources in the VNets will be able to communicate. 
+
+There are two types of VNet peering: Regional and Global. They're pretty straight forward but just know that you can't do Global for Government cloud regions. When you peer to Vnets together, a User-Defined Route is automatically added to the routing table for their remote VNet. The next hope type will be `VnetGlobalPeering` or something of that nature. 
+
+You can use a VPN gateway as a transit point between VNets. A Vnet can have only one gateway. When you allow gateway transit, the VNet can communicate to resources outside the peering. What does all of this mean? Basically, if any number of VNets are peered together, they can use one of the VNets' VPN Gateway to communicate. This is good because ideally, we want a hub-and-spoke architecture. This design is still just a bunch of Vnets peered to one big Vnet. We can have the VPN Gateway sit in the hub Vnet and all the peered spokes can communicate to external resources or on-prem resources by going through the hub's VPN gateway. Remember, all of this costs money. Instead of using a VPN gateway for reach VNet, we can use it for one which will save us money and give us the connectivity we need. 
+
+
 
 
 ## 03.08.2025
