@@ -2,10 +2,36 @@
 
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
+
+## 03.13.2025
+**Today's Topic**
+* Design and implement hybrid networking
+________________________
+Design and implement Azure VPN Gateway
+
+
+## 03.12.2025
+**Today's Topic**
+* Introduction to Azure Virtual Networks
+________________________
+Configure internet access with Azure Virtual NAT
+
+You already know what this is for due to that Load Balancer lab you did. NAT gateways work just like Cisco NAT and they allow Azure resources to go to the internet without needing a dedicated PIP. The Azure resource can have a private IP, go to the NAT Gateway, and then get out to the internet. NAT takes precedence over other outbound scenarios and replaces the default Internet destination of a subnet. 
+
+NAT can support up to 16 PIPs. NAT is also compatible with the following Standard SKU resources: Load balancer, Public IP address, Public IP prefix. 
+
+Limitations: NAT doesn't support IPv6. It can't span multiple VNets. IP fragmentation isn't supported. 
+
+
 ## 03.11.2025
 **Today's Topic**
 * Introduction to Azure Virtual Networks
+________________________
+Implement virtual network traffic routing
 
+An Azure route server simplifies dynamic routing between your NVA and VNet. It's a fully managed service. You don't have to manually update your routing table and UDRs if you're using Azure Route Server. It's supported by BGP.
+
+When troubleshooting VMs, remember that the VM has to be in a running state and that a VM can have multiple NICs in different subnets so they can have different routes. To view these effective routes, go to your NIC and select `support + troubleshooting`. Then, click effective routes to review the routing table. 
 
 ## 03.10.2025
 **Today's Topic**
@@ -30,10 +56,14 @@ Additional system routes are
 
 Each subnet can have zero or one associated route table. When you create a route table and associate it to a subnet, the routes within it are combined with, or override, the default routes Azure adds to a subnet. This introduces new next hop types: 
 * Virtual appliance - You can also specify a next hop IP address for the virtual appliance which can be either the private IP of a VM NIC or an internal load balancer.
-* Virtual network gateway -
-* None -
-* Virtual network -
-* Internet - 
+* Virtual network gateway - used when you want traffic destined to a specific subnet routed to a virtual network gateway. The Vnet gateway must be created with type VPN. 
+* None - think of this as null. 
+* Virtual network - think of it as just overriding the default routing. 
+* Internet - same as above just with internet traffic.
+
+* Making UDRs is easy. Make your route table and assign it to your subnet. To make a new route, give the route a name, destination CIRD, a next hop type and a next hop IP address. Done. 
+
+Forced tunneling can not be deployed in the portal. You have to do it using the CLI. Forced tunneling is when you still make traffic that is destined for the internet or external resource go through the route that you want it to go to. Azure will just send external traffic out to the internet but what if you want to force that traffic through the firewall first just to log and inspect it? This is where you can force tunnel the traffic to make it go where you need it to go first. To configure forced tunneling, you must create a route table, add a user-defined route to the VPN gateway, and associate the routing table to the subnet. 
 
 ## 03.09.2025
 **Today's Topic**
