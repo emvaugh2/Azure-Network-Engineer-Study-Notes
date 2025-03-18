@@ -9,7 +9,7 @@
 ________________________
 Design name resolution for your virtual network
 
-Long work day. Another long day. Trippin
+Long work day. Another long day. Trippin. Fell off. 
 
 
 ## 03.09.2025
