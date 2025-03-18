@@ -14,10 +14,26 @@
 ________________________
 Implement virtual network traffic routing
 
-Azure automatically creates a route table for each subnet within an Azure virtual network and adds system default routes to the table. System routes are just default routes. You can't delete them but you can override them with custom routes (User-Defined Routes). Each route contains an address prefix and a next hop type. When traffic leaving a subnet is sent to an IP address within the address prefix of a route, the route that contains the prefix is the route Azure uses. 
+Azure automatically creates a route table for each subnet within an Azure virtual network and adds system default routes to the table. System routes are just default routes. You can't delete them but you can override them with custom routes (User-Defined Routes). Each route contains an address prefix and a next hop type. When traffic leaving a subnet is sent to an IP address within the address prefix of a route, the route that contains the prefix is the route Azure uses. Below are the system routes:
 
-[!Image](AZ700-1.PNG)
+![Image](AZ700-1.PNG)
 
+Just think of the next hop as the next waypoint that the traffic is directed to on its journey to its ultimate destination. Here are the next hop types:
+* Virtual network - routes traffic between address ranges within the address space of a virtual network. Think of this more like Azure telling the Vnet how to route traffic inside of itself. This will usually be the CIDR the subnets for this Vnet sit in. Azure automatically routes traffic between subnets so this is what that looks like.
+* Internet (0.0.0.0/0) - think of this as a default route for all traffic that is not located within the Virtual network next hop type. So Azure knows how to route traffic inside a Vnet (subnet to subnet) but anything outside of its CIDR, it will send to the Internet next hop type. I think this goes for other VNets inside of Azure. Now, this isn't hte case for Azure services. Azure is intelligent and knows how to get to Azure services so it will send the traffic over the backbone network instead of sending it to the Internet.
+* None - traffic routed to this next hope is dropped. Notice Azure drops all RFC 1918 traffic and also drops traffic to 100.64.0.0/10 which is RFC 6598.
+
+Additional system routes are 
+* VNet Peering - this is when you create a peer link to another VNet. It just adds the remote VNet's prefix and tells it to go over the Azure backbone network.
+* Virtual network gateway - then is when you add a virtual network gateway to your VNet. The prefix is usually advertised from on-prem via BGP.
+* VirtualNetworkServiceEndpoint - this will be the PIP for a service endpoint if you enable the service endpoint. Service endpoints are enabled for individual subnets within a Vnet.
+
+Each subnet can have zero or one associated route table. When you create a route table and associate it to a subnet, the routes within it are combined with, or override, the default routes Azure adds to a subnet. This introduces new next hop types: 
+* Virtual appliance - You can also specify a next hop IP address for the virtual appliance which can be either the private IP of a VM NIC or an internal load balancer.
+* Virtual network gateway -
+* None -
+* Virtual network -
+* Internet - 
 
 ## 03.09.2025
 **Today's Topic**
