@@ -9,6 +9,32 @@
 ________________________
 Design and implement Azure VPN Gateway
 
+A VPN gateway provides an endpoint for incoming connections to an Azure virtual network. It sends encrypted traffic over the internet. It can also be used to connect separate Azure VNets using encrypted tunnels across the Microsoft network backbone. 
+
+Side note, a virtual network gateway is made up of two or more special VMs that are deployed on the gateway subnet. These VMs host routing tables and run specific gateway services. They are managed by Azure. 
+
+When planning a gateway, there are three different architectures: P2S, S2S over internet, and S2S over ExpressRoute. 
+
+You need to plan for throughput, backbone or not, availability of PIP, VPN device compatibility, VPN gateway type, and Gateway SKU. 
+
+Some notes to consider: Use Virtual WAN if you need more than 30 S2S VPN tunnels. Resizing of the VpnGw SKU is allowed within the same generation except for the Basic SKU. A max throughput of 1Gbps can be achieved on one single tunnel. The aggregate throughput benchmark for a VPN gateway is S2S + P2S combined. 
+
+There are two VPN types: PolicyBased and RouteBased. Lets start with PolicyBased
+
+PolicyBased VPNs were previously called static routing gateways. They handle traffic through IPsec tunnels based on IPsec policies. The policy is defined as an access list in the VPN device configuration. The value for a PolicyBased VPN type is PolicyBased. Policy based VPNs which support IKEv1 protocols can be used with the Basic Gateway SKUs only. You can only have one tunnel when using a PolicyBased VPN. You can only use a PolicyBased VPN for S2S connections. Most VPN Gateway configurations require a RouteBased VPN. 
+
+RouteBased VPNs were previously called dynamic routing gateways. They use routes in the IP forwarding or routing table to send traffic to the right tunnel interfaces. The tunnel interfaces then encrypt the traffic. The policy for RouteBased VPNs are configured as any-to-any. 
+
+There's a table that tells you the S2S and P2S connection information for each PolicyBased and RouteBased type. This will definitely be important. 
+
+![Image](AZ700-2.PNG)
+
+
+
+
+
+
+
 
 ## 03.12.2025
 **Today's Topic**
