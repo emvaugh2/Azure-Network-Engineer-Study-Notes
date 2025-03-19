@@ -2,6 +2,21 @@
 
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
+## 03.17.2025
+**Today's Topic**
+* Design and implement Azure ExpressRoute
+________________________
+Design an ExpressRoute deployment
+
+ExpressRoute locations are called peering locations or meet-me-locations. They are colocation facilities where Microsoft Enterprise Edge (MSEE) devices are located. These locations are the entry point to Microsoft's network. They are globally distributed.
+
+They also have satellite options as well. Never knew this. There are also three SKUs for ExpressRoute: Local, Standard and Premium. Local is all unlimited. Standard and Premium can be unlimited or metered. 
+
+The usage of the Microsoft Global Network is charged on top of the ExpressRoute Direct. 
+
+
+
+
 ## 03.16.2025
 **Today's Topic**
 * Design and implement Azure ExpressRoute
