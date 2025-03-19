@@ -3,6 +3,27 @@
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
 
+## 03.14.2025
+**Today's Topic**
+* Design and implement hybrid networking
+________________________
+Design and implement Azure VPN Gateway
+
+The type of VPN you choose depends on the make and model of your VPN device and the kind of VPN connection you intend to create. Most likely it will be RouteBased. You'll need RouteBased for IKEv2. Your SKU affects the number of tunnels and throughput so keep that in mind. Remember, you can't change across generations. You'll have to delete your VPN and make a new one. A VNet can't be associated with more than one gateway. 
+
+Each VPN Gateway requires a gateway subnet. It contains the IP addresses that the virtual network gateway VMs and services use. It has to be named `GatewaySubnet`. 
+
+Next, create the local network gateway. This is the information for the on-prem VPN device. It can be either an PIP or an FQDN. You can also specificy with address prefix to route through the VPN gateway to the VPN device here. The address prefix here is the prefixes located in the on-prem network. You can also use BGP here to make it easier. If this is the case, then the minimum prefix you need to decalre is the host address of your BGP Peer IP address on your VPN device. 
+
+Now, configure your on-prem VPN device. There's a list of devices that Azure works with. Search for this. You'll need to configure a shared key and the PIP of your VPN gateway in Azure. 
+
+Now, you can actually create the connection between them. You'll need to name this connection, select the proper Connection type (such as S2S), and the enter the PSK. Finally, verify that everything is working. 
+
+HA for VPN has the following options: VPN Gatway redundancy (active-standby), multiple on-prem VPN devices, active-actvie Azure VPN gateway, and combinations of all of these. 
+
+
+
+
 ## 03.13.2025
 **Today's Topic**
 * Design and implement hybrid networking
@@ -28,9 +49,6 @@ RouteBased VPNs were previously called dynamic routing gateways. They use routes
 There's a table that tells you the S2S and P2S connection information for each PolicyBased and RouteBased type. This will definitely be important. 
 
 ![Image](AZ700-2.PNG)
-
-
-
 
 
 
