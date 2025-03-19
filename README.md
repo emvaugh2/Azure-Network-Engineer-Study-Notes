@@ -2,6 +2,66 @@
 
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
+## 03.16.2025
+**Today's Topic**
+* Design and implement Azure ExpressRoute
+________________________
+Explore Azure ExpressRoute
+
+Azure ExpressRoute is just a direct connection from your on-prem equipment to the Azure cloud. Your traffic does not traverse the public internet. There are several ways to implement it:
+* Co-located at a cloud exchange - virtual cross-connections to the Microsoft cloud are provided through the colocation provider's Ethernet exchange. This can be either L2 or L3.
+* P2P Ethernet connections - a P2P Ethernet provider can offer Layer 2 or L3 connections to Microsoft cloud
+* Any-to-any (IPVPN) networks - IPVPN providers offer any-to-any connectivity between branch offices and datacenters. This is typically L3.
+* Direct from ExpressRoute sites - I guess there's an ExpressRoute Direct site?
+
+Quick detour on data centers, data center is an umbrella term. It's where all your hardware resources live. Your company can have it's own data center (private) or it can share a data center with other companies (colocation like TierPoint). In a colocation, you provide your own hardware but the data center owner (like TierPoint) takes care of cooling, power requirements, security, etc. If you had your own data center, you would have to manage everything from the facility to the hardware. A cloud data center is where you don't have to worry about anything from the facility to the hardware. You just rent the resources you need. Datacenter is like IaaS. Colocation is like PaaS. Cloud is like SaaS. 
+
+Lets also go over the 4 bullets points above. Okay first off, co-locations like TierPoint and Equinix have what's called a Cloud Exchange at their locations. These cloud exchanges are where you can plug directly into a Layer 2 (literally Ethernet cable) or Layer 3 (a colocation routed highway) connection into one of the cloud providers. Think of it like an airport where the companies pull up and go directly to their cloud provider terminal. 
+
+P2P Ethernet connections are when your ISP provider gives you an Ethernet cable or their own L3 routes to get directly to your cloud provider. Direct from ExpressRoute sites is the same thing except Microsoft gives you the Ethernet cable, not your ISP. 
+
+Any-to-any just means all sites can talk to each other. Its a mesh network. Any one site can talk directly to another site. They're all connected through a mesh. Think of IPVPN as this but the WAN version. How does this work? Your ISP provides an MPLS network for you. So one of your extra "sites" would just be Microsoft. It would be treated like any other branch. 
+
+Lets get redundant. You can configure a S2S VPN for an ExpressRoute backup. You can also do zone redundant gateways as well. 
+
+
+## 03.15.2025
+**Today's Topic**
+* Design and implement hybrid networking
+________________________
+Connect networks with Site-to-Site and Point-to-Site VPN connections
+
+P2S VPN can use one of the following protocols:
+* OpenVPN protocol (which is an SSL/TLS based VPN protocol). Supported by all OSs.
+* Secure Socket Tunneling Protocol (SSTP) (which is a proprietary TLS-based VPN protocol). Only supported by Windows OS.
+* IKEv2 VPN (which is a standards-based IPsec VPN). Supported by Mac devices.
+
+These P2S users have to be authenticated either by native Azure certificate (needs to be installed on each client computer), Microsoft Entra ID (only supported by OpenVPN and Windows 10. Needs an Azure VPN Client), or Active Directory Domain Services (requires RADIUS server and Azure needs to be able to reach this server). 
+
+Azure Virtual WAN is a networking sevice that brings many networking, security, and routing functionalities together to provide a single operational interface. Inlcudes:
+* Branch connectivity
+* S2S VPN
+* P2S VPN
+* Private connectivity (ExpressRoute)
+* Intra-cloud connectivity
+* Routing, Azure Firewall, and encryption for pvirate connectivity
+
+To create a virtual WAN, you need a Virtual WAN, Hub, Hub virtual network connection, Hub-to-hub connection and Hub route table. 
+
+A Virtual WAN can have multiple hubs. Virual WANs are isolated from each other and cant contain a common hub. Hubs in different virtual WANs can't communicate with each other. You have two Virtual WANs SKUs: Basic and Standard. The Basic can only do S2S VPN. The Standard can do everything. 
+
+A virtual hub is a Microsoft-managed VNet. It has various service endpoints. The hub is the core of your network in a region. The minimum address space for a hub is /24. 
+
+You hub also has a gateway that would act as a VPN gateway to connect to your Azure Vnets. 
+
+Virtual Hub routing uses BGP. You can also create a virtual hub route and put them in the routing tables. 
+
+When you create an NVA in the Virtual WAN hub, you get two RGs: A Customer resource group and a managed resource group. The NVA is configured automatically and once it's provisioned, you cant access the NVA directly. 
+
+An NVA Infrastructure Unit is similar to a VPN Scale Unit in terms of the way you think about capacity and sizing. 
+
+
+
 
 ## 03.14.2025
 **Today's Topic**
@@ -20,6 +80,14 @@ Now, configure your on-prem VPN device. There's a list of devices that Azure wor
 Now, you can actually create the connection between them. You'll need to name this connection, select the proper Connection type (such as S2S), and the enter the PSK. Finally, verify that everything is working. 
 
 HA for VPN has the following options: VPN Gatway redundancy (active-standby), multiple on-prem VPN devices, active-actvie Azure VPN gateway, and combinations of all of these. 
+
+Every Azure VPN gateway consists of two instances in an active-standby configuration. For any planned maintenance or unplanned disruption to the active instance, the standby instance would take over automatically. This is for S2S connections. For P2S, the connections are disconnected and the user has to reconnect. 
+
+If you use multiple VPN devices on-prem, you can make an active-active mode (which is separate from the active-standby set up which is still in place). This requires the local nework gateway to have a unique PIP and for BGP to be used. Each local gateway must have a unique BGP peer IP address. You must also use Equal-cost multi-path routing (ECMP). 
+
+There are articles on the Microsoft Azure VPN Gateway site that tells you how to troubleshoot common gateway issues. Check it out if you need it. 
+
+There are also Azure VPN Gateway diagnostic logs. I believe these are found in Azure Monitor. You have Gateway, Tunnel, Route, IKE, and P2S Diagnostic Logs. Very useful. 
 
 
 
