@@ -14,7 +14,7 @@ They also have satellite options as well. Never knew this. There are also three 
 
 The usage of the Microsoft Global Network is charged on top of the ExpressRoute Direct. 
 
-Maybe. Or not. 
+Maybe. Or not. eh
 
 
 
