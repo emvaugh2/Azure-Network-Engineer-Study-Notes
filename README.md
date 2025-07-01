@@ -2,6 +2,13 @@
 
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
+## 07.01.2025
+**Today's Topic**
+* Starting ACG course
+________________________
+
+Got a new job but I'm back like I never left!
+
 ## 03.17.2025
 **Today's Topic**
 * Design and implement Azure ExpressRoute
