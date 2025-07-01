@@ -4,10 +4,41 @@
 
 ## 07.01.2025
 **Today's Topic**
-* Starting ACG course
+* Starting ACG course - Design and Implement Private IP Addressing for VNets | Azure Networking Concepts
 ________________________
 
 Got a new job but I'm back like I never left!
+
+A virtual network is bound to a single region but can span multiple availability zones. Intra-VNet can communicate privately with other VNet resources. Remember peering between VNets. 
+
+All VMs require an IP address. They're associated with a NIC that's attached to the VM. A VM can have multiple NICs. A NIC can also have multiple IPs if you want it to. Both public and private. 
+
+Restricted Subnet IPs:
+- x.x.x.0: Network address
+- x.x.x.1: Reserved by Azure for the defaulte gateway
+- x.x.x.2, x.x.x.3: Reserved by Azure to map the Azure DNS IPs to the VNet space
+- x.x.x.255: Network broadcast address
+
+Restricted Ranges:
+- 224.0.0.0/4 (Multicast)
+- 127.0.0.0/8 (Loopback)
+- 168.63.129.16/32 (Internal DNS)
+
+PIP SKUs
+
+Basic - can be static or dynamic. They are open by default. So all incoming traffic is allowed by default. You'll need an NSG for it. No availability zone redundancy. Less granular routing
+Standard - only static. It's secured by default so all incoming traffic is blocked by default. You'll need an NSG to allow traffic to it. You have zone redundancy and you have more granular routing. 
+
+Remember, some services need their own subnets. Some will automatically make a subnet for you. Others will require you to make these subnets when you create these services. Azure Bastion, Load Balancers, Azure Firewalls are a few to name off the top of my head. 
+
+There's a table that has all the Network serices that require a dedicated service. Search "Services that can be deployed into a virtual network" and look under the network section. 
+
+
+
+
+
+
+
 
 ## 03.17.2025
 **Today's Topic**
