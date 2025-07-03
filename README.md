@@ -10,6 +10,21 @@ ________________________
 
 Azure VNet Routing Concepts:
 
+You have system/default routes and user-defined routes (UDR or custom routes). Common default routes are routes to each subnet, Vnet address prefix, public internet, and dropped routes to reserve\d addresses. 
+
+Situational default routes are VNet peering, virtual network gateway, and service endpoint. 
+
+Source: Default or User. Default means it's a system/default route. User means it's an USD or custom route. 
+
+Address Prefixes are the DESTINATIONS. So it tells you where you'd be looking to get to and how to get there. Think "Where am I going?". 
+
+Next Hop Type is how you get to whatever Address Prefix you're looking to get to. 
+
+Virtual network next hop type - routes between subnets in the same VNet
+Internet next hop type - think of it as a catch-all address. It's like a default gateway that catches everything. This is also how you get to the internet. 
+None next hop type - this will drop whatever traffic destined to your address prefix. You can use this to restrict traffic to certain subnets
+Virtual network gateway next hop type - this is used for VPNs and ExpressRoutes. it automatically populates when you create those resources. 
+Virtual appliance next hop type - you set up and configure a VM that is acting as a network appliance (like an FTDv). This is how you assign traffic to go there. 
 
 
 
