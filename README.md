@@ -2,9 +2,52 @@
 
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
+## 07.03.2025
+**Today's Topic**
+* Starting ACG course - Design and Implement Name Resolution 
+________________________
+
+
+Integrate Private DNS with an Azure VNet:
+
+VNets can only register to one private DNS zone. However, VNets can link to mulitple private DNS zones for DNS resolution. Think of it like this. Your VNet can give all of it's information to only one private DNS zone (register. think of it like joining a club) but if the VNet needs to look up names of other services and VMs and VNets, it can communicate with any other private DNS zone it wants (resolution. link.). 
+
+
+Designing Private DNS Zones:
+
+So with private DNS, there is no public domain registrar present like Cloudflare. This is more for like, connecting to printers and different things inside your company. 
+
+There are 3 different private DNS methods
+- Azure-provided name resolution (this is the default. Azure will automatically register your VM for you. There's a global IP address called the WireServer (168.63.129.16) that handles the default name resolution. Your VM will atomatically register it's name with the WireServer. This DNS resolution is only in that specific VNet. It doesn't span across all the VNets in your environment)
+- Azure private DNS zone (This is how you can customize your records although you can also have services automatically register themselves. Rsolves across Azure VNets. This is for Azure only. You can not resolve on-prem resolutions)
+- Customer-supplied DNS server (this is like a VM that you create for your DNS. Think of it like FTDv instead in Azure instead of using Azure Firewall)
+
+
+Azure DNS Concepts and Designing Public DNS Zones:
+
+Public DNS resolution will look up an authoritative nameserver to resolve the name to an IP address. 
+Private DNS resoltuion will look up a private DNS server to resolve the name to an IP address. 
+
+Azure has public and private services for your environment. 
+
+Azure DNS - a managed DNS host service for public domains. It provides domain name resolution and it's hosted on Azure infrastructure. 
+Some benefits are you can use RBAC, see billing information, and monitor activity all via Azure. 
+
+So for Azure Public DNS, it kind of works like this. You use your computer to go to some website (lets say IGN.com). IGN.com is registered with Cloudflare for example. The domain, that is. If you have Azure DNS, you can have Cloudflare point to Azure DNS so Azure would be the authoritative name server. Then you can just handle all of your records there instead of having Cloudflare handle them or you going into Cloudflare to handle them.
+
+A record - matches the IP address to the name of the website. 
+
+Create the Azure DNS zone in your RG. Then create some DNS records such as A, MX, CNAME, TXT, etc. These records are not live until you change these records at your domain registrar. Once you go into your domain registrar (Cloudflare) and change the records to point to Azure DNS, then your service will go live. 
+
+You can not purchase or register a domain on Azure DNS. Remember, you'll use GoDaddy or Cloudflare for this. 
+
+
+
+
+
 ## 07.01.2025
 **Today's Topic**
-* Starting ACG course - Design and Implement Private IP Addressing for VNets | Azure Networking Concepts
+* Starting ACG course - Design and Implement Private IP Addressing for VNets 
 ________________________
 
 Got a new job but I'm back like I never left!
