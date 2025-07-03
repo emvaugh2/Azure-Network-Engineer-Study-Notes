@@ -2,15 +2,32 @@
 
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
+## 07.0X.2025
+**Today's Topic**
+* AZ-700 - Design, Implement and Manage VNet Routing
+________________________
+
+
+Azure VNet Routing Concepts:
+
+
+
+
 ## 07.03.2025
 **Today's Topic**
-* Starting ACG course - Design and Implement Name Resolution 
+* AZ-700 - Design and Implement Name Resolution 
 ________________________
 
 
 Integrate Private DNS with an Azure VNet:
 
 VNets can only register to one private DNS zone. However, VNets can link to mulitple private DNS zones for DNS resolution. Think of it like this. Your VNet can give all of it's information to only one private DNS zone (register. think of it like joining a club) but if the VNet needs to look up names of other services and VMs and VNets, it can communicate with any other private DNS zone it wants (resolution. link.). 
+
+Static IPs will not be automatically registered. Only dynamic. 
+
+Manual records will override auto registrations if there is both records for a single resource. 
+
+
 
 
 Designing Private DNS Zones:
