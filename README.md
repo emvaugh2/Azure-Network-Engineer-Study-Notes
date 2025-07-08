@@ -2,7 +2,16 @@
 
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
-## 07.0X.2025
+## 07.08.2025
+**Today's Topic**
+* Review - Design and implement core networking infrastructure
+________________________
+
+
+
+
+
+## 07.07.2025
 **Today's Topic**
 * AZ-700 - Design, Implement and Manage VNet Routing
 ________________________
