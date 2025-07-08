@@ -8,6 +8,12 @@
 ________________________
 
 
+To use UDRs at all, you have to make your own routing table. You also have to apply that routing table to ALL the subnets in your Vnet that you want it to affect. It's a one-by-one process. You can see these routes in the "effective routes" tab under the Network tab in the subnet you're looking at. 
+
+Remember, think of the virtual appliance next hop type as an FTDv firewall. Peering is just that, peering. It shares all the subnets from your peered Vnet. Gateway is for VPN creation so think traffic going over the public internet. Internet basically letting Azure send your traffic out of its backbone to the internet. It just knows how to handle this. None is dropped traffic. Vnet is basically saying I'm routing this traffic within the Vnet itself. ServiceEndpoint is good because SEs can change their PIPs here and there. This is so Azure can automatically update your routing table instead of you having to do it. It's a convenient way to get to a resource. 
+
+You can not apply a routing table to a Vnic. The idle timeout category on the PIPs Standard vs. Basic is exactly the same so ignore that section. 
+
 
 
 
