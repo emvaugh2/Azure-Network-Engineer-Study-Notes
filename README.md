@@ -2,6 +2,27 @@
 
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
+## 07.09.2025
+**Today's Topic**
+* AZ-700 - Design, Implement and Manage VNet Routing
+________________________
+
+
+Azure VNet Routing Concepts:
+
+Your route table must be in the same region as your VNet. 
+
+The concept of redirecting internet traffic through a virtual appliance/firewall/VPN is known as forced tunneling. 
+
+The priority for route types are UDR, BGP route (hybrid connections), and then system/default routes. 
+
+You can see effective routes on your VM's NIC. Go to your NIC and then go to effective routes. 
+
+For forced tunneling on VPN gateways, you have to choose the route-based virtual network gateway option. You also have to set the local gateway as "default site". Your local gateway is the remote VPN location (your on-prem network). You have to use PowerShell for this only. This does not apply to ExpressRoute. Only to VPN. 
+
+You need to know Azure Route Server. 
+
+
 ## 07.08.2025
 **Today's Topic**
 * Review - Design and implement core networking infrastructure
