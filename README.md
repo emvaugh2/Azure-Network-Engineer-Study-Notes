@@ -2,6 +2,26 @@
 
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
+## 07.10.2025
+**Today's Topic**
+* AZ-700 - Design and Implement Cross-VNet Connectivity
+________________________
+
+VNets are scoped to a specific region. You may need to connect VNets from different regions to share resources that might be specific to one reason. Also, VNets that are peered all send traffic across the Microsoft backbone. 
+
+You can also peer VNets across regions, subscriptions, and tenants. 
+
+You can also create peer links that traffic only flows in one direction. Interesting. You can also allow your VNet peering to use a virtual network gateway in the remote network as well. This is like if you have a bunch of peered networks in a hub-spoke style and you have that on VPN gateway that goes to your on-prem network. 
+
+Peering VNets CIDR can not overlap. 
+
+I believe if you have access to both VNets, the peering is default created in both directions. So I don't think you have to do one peering and then go to the other VNet to do the other peering. 
+
+Remember, peering is not transitive. You have to peer to all the VNets you want to talk to each other. Just because 3 of them are connected, that doesn't allow the outer VNets to talk to each other via the middle VNet. Basically, you cant daisy chain them thangs together. Virtual network gateways are transitive though. The host VNet needs to allow it and the remote VNet needs to like, also allow it in their settings. 
+
+In a spoke-hub topology, the spokes can not talk to each other still unless you enable it. The 3 options are creating a separate network peering, create a VPN gateway between the spokes (can create high latency though), or an NVA can forward traffic to other spokes. The NVA can be configured with a custom route table and forward the traffic (very useful). ACG didn't state this but Azure peering is transitive only through NVAs. So you can use like a FTDv firewall in the hub to send traffic from one spoke to another spoke without them being peered. 
+
+
 ## 07.09.2025
 **Today's Topic**
 * AZ-700 - Design, Implement and Manage VNet Routing
@@ -20,7 +40,9 @@ You can see effective routes on your VM's NIC. Go to your NIC and then go to eff
 
 For forced tunneling on VPN gateways, you have to choose the route-based virtual network gateway option. You also have to set the local gateway as "default site". Your local gateway is the remote VPN location (your on-prem network). You have to use PowerShell for this only. This does not apply to ExpressRoute. Only to VPN. 
 
-You need to know Azure Route Server. 
+Azure Route Server is basically dynamic routing for Azure that uses BGP. It has a delegated subnet as well called `RouteServerSubnet`. You'll have to peer with the NVA over BGP exchange. ARS is designed specifically for NVAs and VNets. NVA examples are frewalls, SD-WAN gateways, and load balancers. It can also be used with virtual network gateways (VPN). 
+
+ASR is a fully managed service. You can peer multiple NVAs/gateways with route server. They must all have BGP though. 
 
 
 ## 07.08.2025
