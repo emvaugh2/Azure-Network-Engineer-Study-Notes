@@ -2,7 +2,28 @@
 
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
-## 07.10.2025
+## 07.12.2025
+**Today's Topic**
+* AZ-700 - Design, Implement, and Manage an Azure Firewall Deployment
+________________________
+
+Remember, you need to deploy an `AzureFirewallSubnet` in your hub VNet. We have DNAT, network, and application rule types. We have Azure Monitor integration and threat intelligence. We have HA and auto-scaling. We have forced tunneling, FQDN tag supports, Custom DNS and DNS proxy, and service tags. We also have web categories and URL filtering. Basically everything like an FTDv. 
+
+We have two SKUs for Firewall: Standard and Premium
+
+Standard: Support DNAT, network, and application rule types. Threat Intelligence. Azure Monitor integration. FQDN support. Built-in HA. 
+
+Premium: everything from Standard + IDPS. TLS inspection. Web categories. and URL filtering. Obviously more expensive. 
+
+Classic Firewall - all firewalls are managed independently. So it's not like FMC. You have to copy the same rule to all firewalls manually. 
+
+Azure Firewall Manager - like FMC. 
+
+![Image](AZ700-4.PNG)
+
+You get to Firewall Manager by clicking on your firewall and finding it under the Settings tab. Don't forget to make a route table and associate it to a subnet to direct the traffic to the firewall NVA. 
+
+## 07.11.2025
 **Today's Topic**
 * AZ-700 - Implement and Manage Network Security Groups (NSG)
 ________________________
@@ -23,6 +44,15 @@ You can also create services tags (like Internet, Virtual Network, etc) to refer
 
 You associate a resource to an ASG at the NIC-level. 
 
+Application Security Group is a separate resource. Search for it at the top search bar. 
+
+To actually apply the NIC to the ASG, you need to go to the VM and go under Networking. You will see Inbound port rules and Outbound port fules under the Network Interface title. To the right of those, you'll see application security groups. 
+
+Apparently your Azure Cloud Shell instance has it's own PIP. Find the command for that so you can see it in the future. 
+
+NSG Flow Logs are basically the Connection Events for Azure. It's in JSON format and it's logged in a storage account. You have to make sure Network Watcher is enabled for the region that the NSG is in. Your subscription needs to also have the Microsoft.Insights provider is registered. Obviously the NSG needs to be associated to a NIC or subnet. The storage account needs to be in the same region as the NSG as well. You also will eventually need Log Analytics and Traffic Manager but we'll get to that later on in this course. 
+
+To see the NSG flow logs, you'll have to go to the associated storage account and then go under Data Storage > Containers. 
 
 
 ## 07.10.2025
