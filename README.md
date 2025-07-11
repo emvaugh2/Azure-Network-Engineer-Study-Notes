@@ -23,6 +23,21 @@ Azure Firewall Manager - like FMC.
 
 You get to Firewall Manager by clicking on your firewall and finding it under the Settings tab. Don't forget to make a route table and associate it to a subnet to direct the traffic to the firewall NVA. 
 
+DNAT - destination NAT. Think of this like just regular NAT and a load balancer kind of. Someone from the public internet is trying to get to your resource so they address you PIP and port which gets translated to your private IP and port. 
+
+Network rules - think about private IP to private IP like a standard firewall. 
+
+Application rules - Layer 7 (HTTP/HTTPS) rules and inspection. Think FQDNs and URLs. 
+
+Azure Firewalls have a DNAT Rule Collection, Network Rule Collection, and Application Rule Collection. We evaluate these rules from left to right (So DNAT, Network, and then App). These rule collections go into a Rule Collection Group which you can also have multiple of and they have their own priority levels. So a Rule Collection Group will contain a DNAT Rule Collection, Network Rule Collection, and Application Rule Collection. These rule collection groups get grouped into a Policy. We can have multiple policies. You use Azure Firewall Manager to administer your policies. 
+
+You can have a Parent Policy and a Child Policy. The child policies inherit the policies from the parent policy. So you'll always evaluate your parent policy's rules first before the child's policy rules. 
+
+Rule evaluation: start at parent policy. Evaluate the rules in your lowest priority rule collection group (RCG). Then you evaluate all of your DNAT-RC. And then you move to all of your NET-RC. Then you move to your APP-RC. Then you move to the next lowest priority RCG. So forth and so on. Then you move to your child policy and do the same thing. 
+
+
+
+
 ## 07.11.2025
 **Today's Topic**
 * AZ-700 - Implement and Manage Network Security Groups (NSG)
