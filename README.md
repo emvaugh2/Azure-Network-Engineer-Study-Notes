@@ -15,6 +15,15 @@ NSGs are specifically built for L4 traffic filtering. We are filtering traffic f
 
 Azure Firewall does L3-L7 filtering. It's a central management across all networks so peered networks and on-prem networks. This firewall is also stateful. You can also make rules for NAT, network, and application rules. 
 
+![Image](AZ700-3.PNG)
+
+Remember, NSGs are only associated to one single VNet. You can apply it to all resources in that VNet but it does belong to one VNet. All of these resources have to be in the same region as well. NSGs are very simple and concise. 
+
+You can also create services tags (like Internet, Virtual Network, etc) to refer to a group of IP addresses. This is like an ASG as well. 
+
+You associate a resource to an ASG at the NIC-level. 
+
+
 
 ## 07.10.2025
 **Today's Topic**
