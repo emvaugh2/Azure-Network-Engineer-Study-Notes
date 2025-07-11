@@ -4,6 +4,20 @@
 
 ## 07.10.2025
 **Today's Topic**
+* AZ-700 - Implement and Manage Network Security Groups (NSG)
+________________________
+
+An application security group (ASG) is a basically like a network object group and a tag. You can group resources (typically VMs) into an ASG and apply rules like NSGs to that group. Very simple. Think of NSGs as a simple firewall. Think of ASGs as network object groups. 
+
+Azure Firewall requires an `AzureFirewallSubnet` to create it. You can send traffic to this subnet for it to be filtered. You should put the firewall in the hub network for centralized filtering. We will be filtering traffic from L3 - L7. 
+
+NSGs are specifically built for L4 traffic filtering. We are filtering traffic for resources within a SINGLE VNet. We associate these NSGs with a subnet or NIC. It's stateful (if traffic is allowed inbound, then traffic is allowed outbound). They are paired with ASGs. 
+
+Azure Firewall does L3-L7 filtering. It's a central management across all networks so peered networks and on-prem networks. This firewall is also stateful. You can also make rules for NAT, network, and application rules. 
+
+
+## 07.10.2025
+**Today's Topic**
 * AZ-700 - Design and Implement Cross-VNet Connectivity
 ________________________
 
