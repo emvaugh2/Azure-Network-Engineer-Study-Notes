@@ -15,7 +15,7 @@ ExpressRoute is a direction, private connection. It doesn't go over the public i
 
 Virtual network gateway (or just gateway) is the core component for all our hybrid connectivity options. It's the endpoint connecting the VNet and hybrid connection. It's a fully managed service integrated with VNet. It has a dedicated subnet with a specific name. We have a VPN and ExpressRoute gateway. You're limited to a maximum of 1 VPN gateway and 1 ExpressRoute gateway per VNet. 
 
-![Image](AZ700-4.PNG)
+![Image](AZ700-5.PNG)
 
 
 
