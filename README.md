@@ -4,8 +4,18 @@
 
 ## 07.15.2025
 **Today's Topic**
-* AZ-700 - Design, Implement, and Manage a Site-to-Site VPN COnnection
+* AZ-700 - Design, Implement, and Manage a Site-to-Site VPN Connection
 ________________________
+
+All our Azure hybrid connectivity options have encryption by default. We have S2S VPN. Think of it like a network-to-network VPN connection. You need to have a public-facing router that's running IPsec/IKE. 
+
+You also have P2S VPN which is like Cisco AnyConnect. 
+
+ExpressRoute is a direction, private connection. It doesn't go over the public internet. 
+
+Virtual network gateway (or just gateway) is the core component for all our hybrid connectivity options. It's the endpoint connecting the VNet and hybrid connection. It's a fully managed service integrated with VNet. It has a dedicated subnet with a specific name. We have a VPN and ExpressRoute gateway. You're limited to a maximum of 1 VPN gateway and 1 ExpressRoute gateway per VNet. 
+
+![Image](AZ700-4.PNG)
 
 
 
