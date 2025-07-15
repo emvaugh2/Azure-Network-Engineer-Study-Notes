@@ -15,10 +15,24 @@ ExpressRoute is a direction, private connection. It doesn't go over the public i
 
 Virtual network gateway (or just gateway) is the core component for all our hybrid connectivity options. It's the endpoint connecting the VNet and hybrid connection. It's a fully managed service integrated with VNet. It has a dedicated subnet with a specific name. We have a VPN and ExpressRoute gateway. You're limited to a maximum of 1 VPN gateway and 1 ExpressRoute gateway per VNet. 
 
-![Image](AZ700-5.PNG)
+![Image](AZ700-5.png)
 
 
+There are hella Gateway SKUs. Here's the breakdown:
+- Generation
+- Max S2S tunnels
+- Max P2S connections
+- Bandwidth
+- BGP
+- Zone redundancy
 
+Further breakdown. All the non-Basic SKUs support BGP. All of them have a max P2S SSTP connection of 128. So don't even think about that. Generation1 goes from 1 - 3. Generation2 goes from 2 - 5. Both Generations have an AZ version of each SKU. Those AZ versions are the only SKUs that are zone-redundant. Now with that out of the way, the only thing that really changes here are the S2S tunnels, P2S IKEv2 connections, and the bandwith. 
+
+All the SKUs have a max S2S tunnel limit of 30 besides the Generation2 4 and 5 SKUs (both the regular and AZ versions have a max of 100). 
+Generation1 has a max P2S IKEv2 connection going from 250, 500 and 100 (repeats for the AZ versions) (it just doubles for Gen1) and Generation2 has 500, 1,000, 5,000, 10,000 (repeats for AZ versions as well). 
+Lastly (and these repeat for their AZ counterparts. Generation1 has a bandwidth of 650 Mbps, 1 Gbps, and 1.25 Gbps. Generation2 has 1.25 Gbps,  2.5 Gbps, 5Gbps, and 10 Gbps (it doubles for each SKU increment). 
+
+You also have a Basic SKU. You can switch between SKUs except with the Basic SKU. Only amongst the higher SKUs. 
 
 ## 07.12.2025
 **Today's Topic**
