@@ -27,6 +27,19 @@ There are two types of VPNs: Policy-based (legacy) and Route-based (always the b
 
 The default configuration for VPN Gateways is active-standby. You can switch this to active-active though and the tunnels share the connections (HA). For the highest level of redundancy, have an active-active configuration (so both of your VPN VMs are passing traffic) and have 2 on-prem network connections (so like two routers with PIPs) and have your VMs connection to both on-prem routers. Remember, one virtual network gateway has two VMs so it's not like you're making two virtual network gateways. 
 
+Troubleshooting VPN gateways:
+
+The gateway will generate 5 types of logs: 
+- Gateway Diagnostic Log - configuration changes and maintenance events
+- Tunnel Diagnostic Log - tunnel state changes and connect/disconnect events
+- Route Diagnostic Log - route changes (static and BGP)
+- IKE Diagnostic Log - used specifically for IKE control events. Useful for troubleshooting IPsec tunnel handshakes (like Phase 1 and Phase 2 with the AES and DH stuff)
+- P2S Diagnostic Log - specifically for point-to-site VPN activity
+
+To see these logs, go to the Monitor service in Azure. Then go to Settings > Diagnostic settings. Then look for the resource group your gateway is in and then click on it. 
+
+You can also see the logs in the actual gateway resource itself. Go to the gateway and then going to Monitoring > Logs. Then, you can run queries from there. Now this all looks a bit convoluted but at least you have the option to do this. Ask Chat GPT to help you form these queries. 
+
 ## 07.15.2025
 **Today's Topic**
 * AZ-700 - Design, Implement, and Manage a Site-to-Site VPN Connection
