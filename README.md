@@ -2,10 +2,36 @@
 
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
+## 07.16.2025
+**Today's Topic**
+* AZ-700 - Design, Implement, and Manage a Site-to-Site VPN Connection
+________________________
+
+S2S VPN Connections
+
+Remember, address spaces must not overlap. 
+
+Create the gateway subnet (recommended is a /27). The VPN gateway service is actualy two VMs in the background. You don't interact directly with them though. 
+
+Now, you need a local network gateway. The local network gateway in the on-prem side. So that would be the (Cisco) router's Public IP and networks. The virtual network gateway is the Azure side so think FTDv or just, Azure lol. 
+
+You DO NOT need a local network gateway for Vnet-to-Vnet connections. 
+
+Lastly, you'll create the VPN connection itself with the encryption agreements on each side. 
+
+You can only have one VPN gateway per VNet. 
+
+There are two types of VPNs: Policy-based (legacy) and Route-based (always the better option)
+
+![Image](AZ700-6.png)
+
+The default configuration for VPN Gateways is active-standby. You can switch this to active-active though and the tunnels share the connections (HA). For the highest level of redundancy, have an active-active configuration (so both of your VPN VMs are passing traffic) and have 2 on-prem network connections (so like two routers with PIPs) and have your VMs connection to both on-prem routers. Remember, one virtual network gateway has two VMs so it's not like you're making two virtual network gateways. 
+
 ## 07.15.2025
 **Today's Topic**
 * AZ-700 - Design, Implement, and Manage a Site-to-Site VPN Connection
 ________________________
+
 
 All our Azure hybrid connectivity options have encryption by default. We have S2S VPN. Think of it like a network-to-network VPN connection. You need to have a public-facing router that's running IPsec/IKE. 
 
