@@ -2,6 +2,34 @@
 
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
+
+## 07.30.2025
+**Today's Topic**
+* AZ-700 - Design, Implement, and Manage a Point-to-Site VPN Connection
+________________________
+
+P2S is like a network-to-computer connection. Think Cisco AnyConnect. 
+
+For our P2S VPN in Azure, we still need a VPN Gateway with a gateway subnet. Also, the Basic SKU is limited to only the SSTP Tunnel type. 
+
+The VPN Client address pool is the address range assigned to connected clients. Think of it like the VPN Pool IP address range. 
+
+The P2S Tunnel Type and Authentication Methods must match on the VPN gateway and the client. Think EAP. 
+
+The 3 tunnel types are: OpenVPN, Secure Socket Tunneling Protocol (SSTP), and IKEv2
+- OpenVPN - it's an open standard that supports all the major operating systems (Linux, Windows, Mac, etc).
+- SSTP - proprietary standard (not open) and only works for Windows only
+- IKEv2 - standards-based IPsec VPN solution. It's really close to what S2S connections use. It has almost the same range of capability as OpenVPN. Supports Windows 10 and newer. Windows Server 2016 and newer. Also MacOS, Linux, and Android.
+
+
+The 3 authentication methods are: certificate, Azure AD, and RADIUS server. 
+- Certificate - native Azure certification authentication. It's generated from a trusted root certificate. You have to install this on each client computer. Must re-download certificate to client after new VNet peering.
+- Azure AD - authenticate with Azure AD credentials. Really good for Microsoft 365 environments. Requires an Azure VPN client. It works only with OpenVPN protocol. It's only supported on Windows and Mac only (so no Linux or mobile devices). 
+- RADIUS server - Active Directory domain integration (on-prem AD, not Azure AD). It's ideal for existing RADIUS deployments. 
+
+![Image](AZ700-7.png)
+
+
 ## 07.16.2025
 **Today's Topic**
 * AZ-700 - Design, Implement, and Manage a Site-to-Site VPN Connection
