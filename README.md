@@ -2,6 +2,94 @@
 
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
+## 08.01.2025
+**Today's Topic**
+* AZ-700 - Design and Implement an Azure Virtual WAN Architecture
+________________________
+
+Think of Virtual WAN has "easy mode" hub and spoke topology. It's a managed hub-and-spoke infrastructure though. You can incorporate hybrid connections (VPN/ER), multiple VNets, handles routing, and easily deploy NVA/Azure firewalls too. Technically, you don't have to use Azure Virtual WAN at all but it can make your life easier. If you didn't have Azure Virtual WAN, you'd have to add/update routes, establish network gateway connections, integrating and deploying virtual appliances/firewalls, etc. Everything will be managed by YOU. 
+
+Virtual WAN is an overlay of the entire virtual WAN infrastructure which can have 1 or more hubs. The Virtual WAN Hub is a VNet that's managed. It's the core of the Virtual WAN. It's also the connection point to VNets, VPN, and ER circuits. 
+
+Next, you have Connection Units (which are hybrid connections) that are you S2S VPNs, P2S VPN (OpenVPN/IKEv2 only), and ExpressRoute circuits. 
+
+You also have VNets connections and hub-to-hub connections. 
+
+With Virtual WAN Hubs, Vnet connections can be transitive so you don't have to peer everything. Standard Virtual WAN has managed a router that forwards traffic. 
+
+We have two SKUs: Basic and Standard. 
+
+![Image](AZ700-12.png)
+
+
+
+
+## 07.31.2025
+**Today's Topic**
+* AZ-700 - Design, Implement, and Manage Azure ExpressRoute
+________________________
+
+ExpressRoute - a private connection to Microsoft Cloud. It doesn't go over the public internet. It's a Layer 3 connection that operates over BGP. We're not just connecting VNets from your on-prem to Azure. ExpressRoute is a private connection to multiple Microsoft services, not just VNet. ExpressRoute is reliable and fast. It has built in redundancy (active-active connection). It has speeds up to 100 Gbps. 
+
+The set up is like this. You have your own on-prem network that's in a co-location or a data center. Then, you have a partner edge. These are the ISP routers that connect to your on-prem connection and also connect to Microsoft's infrastructure. Ths partner edge connects to the Microsoft edge. The Microsoft edge is the Microsoft side that connects to your Azure resources. 
+
+
+![Image](AZ700-8.png)
+
+ExpressRoute is private but it's no encrypted by default. Here are some encryption models:
+- MACsec - Layer 2 encryption. Usable with ExpressRoute Direct
+- IPsec - Layer 3 encryption. Can establish a VPN encrypted tunnel over ExpressRoute line.
+
+Billing Models
+- Unlimited - all inbound and outbound data is free
+- Metered - inbound is free, outbound is charged.
+
+Gateway SKUs (remember, these all of AZ versions so it's really 6 SKUs. The AZ versions are the availability zone versions). 
+
+![Image](AZ700-9.png)
+
+Connectivity Models - how you connect to Microsoft (think of this as the Partner Edge to Microsoft Edge connection). There are 4 different connections. 3 are Service Provider Models. The last one is a Direct model. 
+- Service Provider Models (SPM)
+- Cloud Exchange Co-Location (SPM) - useful if you have some type of data center presence in a co-location with your service provider. Your ISP just needs to set up a cross connection between your on-prem to Microsoft edge. 
+- P2P Ethernet Connection (SPM) - when you have your own, self-managed data center or office that's not in the same location as your ISP. Your ISP will give you a connection from your on-prem to Microoft Edge. 
+- Any-to-Any (IPVPN) Connection (SPM) - If you have a WAN or an SD-WAN like MPLS. Your ExpressRoute becomes another "branch office" for your entire network. This of this set up as if you're using SD-WAN. Usually, SD-WAN is a mesh grid set up. Now, your ExpressRoute will just be another site or branch. All of the routing is handled through your ISP though (like an MPLS circuit). 
+- Direct Model (DM)
+- ExpressRoute Direct (DM) - we're establishing a direct connection from your on-prem network to Microsoft Edge. You're connecting to a Microsoft edge router with physical ports. So you're removing that Partner Edge section in the diagram. 
+
+
+![Image](AZ700-10.png)
+
+
+
+Service Models - regional restrictions and circuit SKUs. We have ExpressRoute Standard, Local, and Premium
+- Standard - Connect across Azure regions in geopolitical region.
+- Local - can connect only to regions near peering location. Least expensive. Inbound and outbound data is free.
+- Premium - can connect to all geopolitical regions around the world. Has the highest level of connections. We can connect privately to Microsoft 365. We also get acccess to global reach.
+
+Lets talk Global Reach and FastPath. 
+
+Global Reach - lets you directly connect on-premi locations over Microsoft's backbone. Think about connecting two of your networks but you're using the backbone for it. It's like building your own cloud using Microsoft's infrastructure. This requires ExpressRoute Premium. Think fully on-prem. Microsoft is damn near the (private) ISP in this case. 
+
+![Image](AZ700-11.png)
+
+
+FastPath - route traffic directly to a virtual machine. We still need a gateway but the traffic will skip the gateway which reduces a hop. This is for low latency requirements. You need either the Ultra Performance/ErGw3AZ SKU for this. This is a express route network gateway SKU, not the Global Reach SKU. Keep those in mind. 
+
+There are two types of ExpressRoute SKUs: Circuit SKUs (Local, Standard, and Premium) and Gateway SKUs (Standard/ErGW1Az, HighPerformance/ErGW12z, and UltraPerformance/ErGW3Az ). Keep these in mind. 
+
+Bidirectional Forwarding Detection (BFD) - improved circuit failure detection speed/failover. It's enabled by default in any ExpressRoute circuit. You may need to enable it on your on-prem networks though. 
+
+The Azure Private peering is the BGP peering between your network and Azure environment.
+
+You have to create a VPN gateway first for your ExpressRoute and then go to ExpressRoute circuits Azure service to create the circuit. 
+
+You need to go through this Demo: Implementing ExpressRoute video again and use Copilot to help you map out each part. It's like 3 parts. Create the ExpressRoute service. Connect that to our ISP. Create the peering from your on-prem network to Azure using BGP. Then you need to connect the ExpressRoute to your virtual gateway. Ask Copilot about. 
+
+If there is no connectivity at all, verify the circuit state and provisoning. Check the peering configuration. Test the private peeting connectivity using the Diagnose and solve problems options in the blade. Verify that ExpressRoute network gateway availability. Use the Diagnose and solve problems option here as well. 
+
+
+
+
 
 ## 07.30.2025
 **Today's Topic**
@@ -28,6 +116,15 @@ The 3 authentication methods are: certificate, Azure AD, and RADIUS server.
 - RADIUS server - Active Directory domain integration (on-prem AD, not Azure AD). It's ideal for existing RADIUS deployments. 
 
 ![Image](AZ700-7.png)
+
+Make sure your protocol/authentication method/OS match. It's safest to use OpenVPN. Also remember, multiple VNets that are peered can use one of those VNet's VPN gateway. BUT a peered Vnet to another peered VNet that's connected to a VPN gateway can not use that VPN gateway because remember, that extra hop peer is not transitive. It's only 1 hop. 
+
+Also, if you make a new peer VNet, you'll need to re-download the VPN configuration to all the clients. Even if it's just one new peered VNet. So keep this in mind. 
+
+Diagnostic Logs
+- P2S uses the P2SDiagnosticLog. It's only able to capture logs for OpenVPN and IKEv2 only. If you're using Azure VPN Client, go to the client and click on the Diagnose tool on the actual client side.
+
+
 
 
 ## 07.16.2025
