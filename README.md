@@ -3,6 +3,19 @@
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
 
+## 08.05.2025
+**Today's Topic**
+* AZ-700 - Design and Implement an Azure Load Balancer
+________________________
+
+
+In a regional load balancer, you'll have a load balancer in each region that you're using. THEN, you'll have a global load balancer that balances traffic to those load balancers in each region. So if you have 2 regions, you'll have 3 overall load balancers: One for each region and another one that's a global load balancer. 
+
+This will be a public load balancer and choose the Global option for Tier. Add your PIP for it. 
+
+When you add your backend pool, it will automatically load up your load balancers. This is one of the differences between a VM LB and an LB LB lol. 
+
+
 ## 08.02.2025
 **Today's Topic**
 * AZ-700 - Design and Implement an Azure Load Balancer
