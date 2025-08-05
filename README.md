@@ -3,6 +3,23 @@
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
 
+## 08.06.2025
+**Today's Topic**
+* AZ-700 - Design and Implement an Azure Application Gateway
+________________________
+
+Application Gateway does load balancing on Layer 7 (HTTP/HTTPS). We can have a private or public frontend. You can load balance to VMs, VMSS, App Service, IP adrresses, or FQDNs. You obviously have AZs for redundancy. You have multiple SKUs (v1 or v2) with optionally a Web Application Firewall (WAF). 
+
+Application Gateways also have autoscaling and path-based routing. You have multi-site support and health probes as well. Lastly, you have TLS encryption. 
+
+You'll need an Application Gateway Subnet (AppGwSub) just like with the gateway subnets. This is where you'll deploy the Application Gateway. You need at least a /26 but you should probably use a /24. You also have your Listener. This is listening for traffic on specific ports. You also have a certificate configuration for the TLS encryption between the Application Gateway and the client. Then we have a rule that tells the configuration details on where we're going to route the traffic. This will have our HTTP settings. We also have a health probe. 
+
+![Image](AZ700-14.png)
+
+
+
+
+
 ## 08.05.2025
 **Today's Topic**
 * AZ-700 - Design and Implement an Azure Load Balancer
