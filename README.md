@@ -2,6 +2,32 @@
 
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
+
+## 08.02.2025
+**Today's Topic**
+* AZ-700 - Design and Implement an Azure Load Balancer
+________________________
+
+Internal Azure load balancers still have outbound connectivity to the internet. External Azure load balancers can do both inbound and outbound connectivity to the internet. 
+
+Components of your load balancer: Frontend IP, Backend Pool, Health Probe, and your LB Rules (like DNAT). 
+
+Lets talk session persistence. You can use this information (src-dst IP, src-dst port, and protocol) to establish the stickiness of a session. 
+
+Types of Rules: DNAT (dst IP and port that translates to another IP and port on the back end. This goes to a specific VM in your backend pool), load balancing rules (how the traffic is balanced from the front end to the backend pool of devices), and SNAT (the reverse of DNAT. So source is private IP inside your network that goes to your private IP on your load balancer which goes to the public IP and port of your load balancer and out to the internet). 
+
+Load Balancers are L4. You can also deploy your Azure LB on a regional or global basis. You also have your Basic SKU and Standard SKU. 
+
+Your health probe can be either TCP, HTTP, or HTTPS. 
+
+![Image](AZ700-13.png)
+
+HA port rules are an any-to-any IP and port from the frontend to the backend pool. You can only use this with your internal load balancers on your Standard SKU btw. 
+
+
+
+
+
 ## 08.01.2025
 **Today's Topic**
 * AZ-700 - Design and Implement an Azure Virtual WAN Architecture
@@ -21,7 +47,13 @@ We have two SKUs: Basic and Standard.
 
 ![Image](AZ700-12.png)
 
+The S2S and P2S VPN connections are separated in the Virtual WAN hub. You create these connections in the hub though. You also configure throughput through scale units. Think of this like a SKU. Like a bandwith SKU. 
 
+The scale units are different between VPN and ExpressRoute. So keep them separate. A VPN scale unit is 500 Mbps. An ExpressRoute scale unit is 2 Gbps. They just got up by this increment every time. 
+
+Make a list of all the services you have to (or can) create within the hub and which ones you have to create outside of the hub. 
+
+Hubs in a Virtual WAN service automaticlly connect to each other. 
 
 
 ## 07.31.2025
