@@ -20,12 +20,21 @@ The client device makes a TCP connection and then a TLS connection (both to the 
 
 The Azure Front Door architecture is the Frontend Endpoints, Routes, and Origin Groups (backend resources). The Origin Groups can have origins which would be resources behind an application gateway. The Frontend will be an Azure Front Door domain (x.AzureFrontDoor.net). You can add a custom domain to this domain. You can also have multiple domains like (y.AzureFrontDoot.net). The routing will have the Frontend, Origin Group/URL, Caching Settings, and Rule Sets. 
 
+Origin Groups - backend pool
+Origin - backend target 
+Frontend endpoint - domain
+
 Azure Front Door has two SKUs: Classic v1 and Standard/Premium v2. 
 
 ![Image](AZ700-15.png)
 
 
 ![Image](AZ700-16.png)
+
+Standard - CDN optimized. Premium - security optimized
+
+![Image](AZ700-17.png)
+
 
 
 
