@@ -3,6 +3,32 @@
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
 
+## 08.07.2025
+**Today's Topic**
+* AZ-700 - Implement an Azure Front Door
+________________________
+
+This is a global L7 Load Balancing solution. Remember, Application Gateway is regional. Azure Front Door is global.
+
+Azure Front Door acts like a Content Delivery Network (CDN). So say a user wants to connect to a service in a different region (think a different continent). That would take longer to access. The client can connect to a Microsoft edge location and then use the Microsoft network to connect to the next region. Think of it like instead of traversing the entire public internet to get to one of your remote sites, you connect to your nearest HQ branch and then use your own private, P2P connection to get to your remote site. It's just faster and more secure. 
+
+You can also cache information at those edge locations so the actual edge location can serve up the content you're requesting. 
+
+The components of Azure Front Door are the Frontend, Backend, and Routing. The routing connects the Frontend and Backend. 
+
+The client device makes a TCP connection and then a TLS connection (both to the edge location). Then the edge location sends the traffic to the Azure service. The service sends the traffic back to the edge location (Front Door) and then it sends it to the client. That edge location (since it just was the middle man in this traffic), it can cache some of that content at the edge since it's seeing everything anyway. Now, only that edge location caches the content. This edge location wont share it with other edge locations. But yeah if another client accesses that first edge location, the edge location can just send the new client the info instead of connecting it to the Azure service. 
+
+The Azure Front Door architecture is the Frontend Endpoints, Routes, and Origin Groups (backend resources). The Origin Groups can have origins which would be resources behind an application gateway. The Frontend will be an Azure Front Door domain (x.AzureFrontDoor.net). You can add a custom domain to this domain. You can also have multiple domains like (y.AzureFrontDoot.net). The routing will have the Frontend, Origin Group/URL, Caching Settings, and Rule Sets. 
+
+Azure Front Door has two SKUs: Classic v1 and Standard/Premium v2. 
+
+![Image](AZ700-15.png)
+
+
+![Image](AZ700-16.png)
+
+
+
 ## 08.06.2025
 **Today's Topic**
 * AZ-700 - Design and Implement an Azure Application Gateway
