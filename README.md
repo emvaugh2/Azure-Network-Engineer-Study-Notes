@@ -17,6 +17,28 @@ You'll need an Application Gateway Subnet (AppGwSub) just like with the gateway 
 ![Image](AZ700-14.png)
 
 
+Application Gateway Deployment Options: Subscription/RG, App Gateway Name, Region, SKU, Autoscaling, Minimum/Maximum scale units (1-3), AZ, HTTP2 (not enabled by default), VNet/subnet selection
+
+Lets configure the Frontend. We need a PIP (external App Gateway) or private IP (internal App Gateway) or both. The v2 SKU does not support private IP ONLY option. It only supports static PIP or both (PIP and private). v1 supports static or dynamic PIP. LAstly, you need to associate your Frontend with a listener.
+
+Listeners check form incoming connection requests using: IP address, Port, Protocol, and/or host (like www.ign.com).
+
+We have two types of listeners:
+- Basic - single domain site. Single DNS mapping to IP address
+- Multi-Site - if you have multiple domains. You can have multiple 100+ sites but you can only have 5 hostnames per listener.
+
+When you route traffic, you're using routing rules to bind the listener, backend target, and HTP settings. The listener accepts request and sends it to a backend target. 
+
+You also have path-based routing rules which you could think of like if a domain has an extra path like /images or /videos. Those are paths. 
+
+You have redirection settings and rewrite rules (which rewrite URLs entirely). 
+
+You can have TLS termination or end-to-end encryption. In TLS termination, the app gateway just presents a cert to the client and once the app gateway forwards the traffic into Azure, the traffic is decrypted. 
+
+For end-to-end encryption, think of it like TLS termination but after the traffic gets to the listener, the listener has a rule with HTTP Settings. The HTTP Settings has another certificate that it uses to encrypt the traffic until it gets to the backend target. 
+
+For rewrite rules, you can translate URLs, translate query string parameters (think of that question market that be in the URLs), and modify HTTP headers (I don't know what this means at all). 
+
 
 
 
