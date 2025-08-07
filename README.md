@@ -42,6 +42,8 @@ For rewrite rules, you can translate URLs, translate query string parameters (th
 
 
 
+
+
 ## 08.05.2025
 **Today's Topic**
 * AZ-700 - Design and Implement an Azure Load Balancer
