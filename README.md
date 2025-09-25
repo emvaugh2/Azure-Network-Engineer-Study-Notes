@@ -21,6 +21,10 @@ Network rules - we have a source IP and port trying to get to a destination IP a
 
 Application rules - we have a source IP that we want to allow or deny to an FQDN. DNAT rule collection > Network rule collection > Application rule collection . We can have multiple of each collections with a priority number for each collection in one rule collection group. For example, we can have 3 DNAT rule collections, 2 network rule collections, and 5 Application rule collections (each individual collection with it's own priority number within it's group (lowest number wins)) and then these all go in a rule collection group. And then we can have multiple rule collections that have their own priorities as well as to which one the FW uses first. 
 
+These rule collection groups make up a policy. You then assign policies to your firewall. So you can make Policy 1 for a few diffferent firewalls and make an entirely new Policy 2 for another set of FWs to keep everything separate. 
+
+Now, we have Parenty Policies and Child Policies. Basially, Parent policies are the overarching policy that's evaluated first and then the child policies. This is inheritance. 
+
 
 ## 08.07.2025
 **Today's Topic**
