@@ -25,6 +25,10 @@ These rule collection groups make up a policy. You then assign policies to your 
 
 Now, we have Parenty Policies and Child Policies. Basially, Parent policies are the overarching policy that's evaluated first and then the child policies. This is inheritance. 
 
+(Most likely in the Azure sandbox, you'll just be using a Classic FW which is not managed via Firewall Manager. So you'll have all your rule collection groups but that's it. That's all we need anyway). 
+
+******* Why do we associate the route table to our hub Vnet? I thought we would only associate it with our spoke Vnet subnets. Also, what does "dig" stand for in Bash? THey did this for DNS (domain information groper). 
+
 
 ## 08.07.2025
 **Today's Topic**
