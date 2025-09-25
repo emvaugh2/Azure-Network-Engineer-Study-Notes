@@ -3,6 +3,25 @@
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
 
+## 09.25.2025
+**Today's Topic**
+* AZ-700 - Azure Firewalls
+________________________
+
+
+Make all traffic in your route table destined for 0.0.0.0/0 destined to go to the network virutal appliance optino which will be the private address of your Azure Firewall from a specific subnet. 
+
+Lets deploy it. Make a Firewall Subnet (this is needed for the firewall itself (why?)) and the Firewall Management Subnet (which is to route the management traffic of the firewall from it's customer traffic and support force tunneling (how does it support forced tunneling?)). You can change the subnet purpose to automatically set this up for each FW subnet. 
+
+Go to the Firewall blade and create a new one. Subscription, RG, name, location, the basics. If you use the Premium Firewall SKU, you'll have to create a new FW policy. Give hte policy a neame and keep everything else as default (don't change anything else). Use your same Vnet and subnet that you already created. Give it a PIP. Also, giev it a management PIP. Now create it. Very easy. 
+
+Lets create the rule collection. DNAT is from the internet to your internal Azure private IPs. It's trying to get to a destination on your Azure network. The client connects to a specific port on your FW PIP. And then we map this PIP and port to a private IP and port on the internal network. 
+
+Network rules - we have a source IP and port trying to get to a destination IP and port on a specific protocol. 
+
+Application rules - we have a source IP that we want to allow or deny to an FQDN. DNAT rule collection > Network rule collection > Application rule collection . We can have multiple of each collections with a priority number for each collection in one rule collection group. For example, we can have 3 DNAT rule collections, 2 network rule collections, and 5 Application rule collections (each individual collection with it's own priority number within it's group (lowest number wins)) and then these all go in a rule collection group. And then we can have multiple rule collections that have their own priorities as well as to which one the FW uses first. 
+
+
 ## 08.07.2025
 **Today's Topic**
 * AZ-700 - Implement an Azure Front Door
