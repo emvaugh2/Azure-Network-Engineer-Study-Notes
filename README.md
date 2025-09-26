@@ -5,6 +5,37 @@
 
 ## 09.25.2025
 **Today's Topic**
+* AZ-700 - Azure Service Endpoints
+________________________
+
+Lets get this thing over with. I only used private endpoints in my last job. Azure services = PaaS/managed services. These are accessed over the public internet. This means this service is also access to the public. So a service endpoint lets us access these services from out VNet to our Azure Paas services. The service pretty much acts as if they are in the same VNet. 
+
+The public endpoint is not removed. The traffis is just redirected. 
+
+Azure services for service endpoints: storage, DBs, Key Vault, App Services, container registries, etc. 
+
+Not every Azure service supports service endpoints. 
+
+Go to your Vnet and go to Service endpoints. Add a service to your specific subnet. Voila. You can further restrict the public IP access by going to the service itself and then click on Networking. Then you can select which VNets and subnets you want to allow access. 
+
+Allowing a service endpoints allows access to ALL of the manage services that fit that category. So Microsoft.Compute is all VMs. You can restrict this by creating a service endpoint policy.
+
+Service endpoints only work for Vnet, not on-prem networks. You would have to access this service via the public IP. You also need to keep in mind the FW/NSG when allowing traffic to these Service Endpoints. 
+
+Go to the Azure search bar and look for service endpoint policy. Fill in the normal details. Now, choose the resource you want to restrict (say, a specific storage account). The pop up window will have the Service type (Microsoft.Storage), account, subscription, RG, and then just look for your resource (storage account). You can also add an alias but I would assume that's if you have Azure private DNS going. Or some type of DNS. Lastly, you assign the policy when you create the Service Endpoint. Once you choose Service Type and you choose your type (Microsoft.Storage), the policy option will pop up. Choose it. Voila. 
+
+So restrict access from the managed services side, go to your service and go to Security + Networking > Networking > Firewalls and virtual networks. You can choose "enabled from selected virtual networks and IP addresses" and fill in your information for your subnet. Save it. Done. 
+
+There's a FW component to this so keep that in mind. Not that I'll ever be using it. 
+
+Service Tags - use these so that you don't have to keep up with changing IPs for Microsoft managed services. Microsoft will change the IPs on these so in order to not worry about it, make a rule using the service tag instead and the FW/NSG will handle the rest. There are different types of service tags btw. Not just for Microsoft services. So experiment with them. 
+
+Think of Service Endpoints as restricting access to a service on a subnet-scope level. You're still going to the public IP of the service but it's restricted on the Microsoft backbone. 
+
+
+
+## 09.25.2025
+**Today's Topic**
 * AZ-700 - Azure Firewalls
 ________________________
 
