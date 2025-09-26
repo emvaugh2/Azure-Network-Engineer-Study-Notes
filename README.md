@@ -3,7 +3,34 @@
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
 
-## 09.25.2025
+## 09.27.2025
+**Today's Topic**
+* AZ-700 - Azure Service Endpoints
+________________________
+
+Apparently private link and private endpoints are different things. Private endpoints allow restriction to ONE service (so one storage account or one DB) instead of the entire service type. It also allows private access to hybrid environments so on-prem private access. 
+
+Private Link - broader service linknig Azure services to private endpoints
+Private Endpoint - the VNet component that is deployed to a subnet
+Private Link Service - seperate from Private Link itself which is a load-balanced network that connects to private endpoints
+
+Private endpoints usually replace the public endpoint to a service. 
+
+Private endpoints completely IGNORE NSG enforcement. It bypasses it. Keep that in mind. 
+
+Private Link Center is where you create private endpoints. Think of that as the overall service/resource. You can either create a private endpoint here or by going to the service and creating it there. 
+
+As far as DNS goes, Private Link will inject privatelink.* into whatever PaaS URL you have. so if you have lakjsd.database.windows.net, you'll have something like lakjsd.privatelink.database.windows.net . Follow me VVVV
+When a Vnet resource tries to access a private service, it will by default use the FQDN. This FQDN maps to the PIP. With Private Link, these queries will be re-mapped to the Private Link addresses. Then, DNS will look for the private IP for this new privatelink URL which will give it the private IP. 
+
+Private DNS is necessary to convert queries. When you create a private endpoint, Azure automatically creates an Azure private DNS zone for you. 
+
+Private Link Service is different. You have to have a Load Balancer to create the Service. It's a load-balanced VNet connect to a private endpoint. ***** What's the point of this?
+
+
+
+
+## 09.26.2025
 **Today's Topic**
 * AZ-700 - Azure Service Endpoints
 ________________________
