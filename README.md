@@ -3,9 +3,17 @@
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
 
+## 09.28.2025
+**Today's Topic**
+* AZ-700 - Azure Network Monitoring & PaaS
+________________________
+
+
+
+
 ## 09.27.2025
 **Today's Topic**
-* AZ-700 - Azure Service Endpoints
+* AZ-700 - Azure Private Endpoints
 ________________________
 
 Apparently private link and private endpoints are different things. Private endpoints allow restriction to ONE service (so one storage account or one DB) instead of the entire service type. It also allows private access to hybrid environments so on-prem private access. 
