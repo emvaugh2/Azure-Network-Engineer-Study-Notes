@@ -9,6 +9,16 @@
 ________________________
 
 
+Azure monitor is a full-stack monitoring system. You can montor Azure resources, on-premises resources, platform services and application code. 
+
+Metrics - short, time-based data. Frequently updated and it's near real-time data
+Logs - long, event-based data. Sporadically updated. Free-form and/or structured. Stored in Log Analytics. 
+
+We can get Metrics into Azure Monitor, Log Analytics, Storage Accounts and Event Hub. We can get Logs into Log Analytics, Storage Accounts, and Event Hub. 
+
+
+
+
 ## 09.28.2025
 **Today's Topic**
 * AZ-700 - Azure Network Monitoring & PaaS
