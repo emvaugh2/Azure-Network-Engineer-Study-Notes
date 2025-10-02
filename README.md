@@ -2,6 +2,42 @@
 
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
+## 10.02.2025
+**Today's Topic**
+* AZ-700 - Implement a Web Application Firewall (WAF) Deployment
+________________________
+
+WAF is a PaaS designed specifically for protecting web applications. You can create them on Application Gateways (regional) and Front Door (global). You can either configure them per resource or make a policy to apply the policy to different resources. 
+
+You'll need to set diagnostics settings on the resources so a Storage Account and Log Analytics. 
+
+WAF components: Status (enabled/disabled), Mode (detection/prevention), Exclusions (excluded from evaluation), Rules (managed/custom rules), Association (Application Gateway/Front Door). 
+
+
+
+
+## 10.02.2025
+**Today's Topic**
+* AZ-700 - Configure VNet Integration for Dedicated PaaS Services
+________________________
+
+We're talking about outbound traffic from an App Service to your VNet. It depends on if the VNet is in the same region or not as your App Service. If it's in the same region, you can connect your App Service directly to the VNet. Just deploy it to an empty subnet. 
+
+If the VNet is in a different region, you need a VPN Gateway in the VNet. This only works for Windows apps only because this connection requires a SSTP P2S VPN connection which is a Windows proprietary service. 
+
+By defeault, App Service does not work with Azure private DNS zones. 
+
+App Service Environment (ASE) - managed App Service VMs in your VNet. It's isolated from your App Service multi-tenancy. It requires a dedicated subnet as well and a NSG must be applied to the subnet. 
+
+App Service and ASE are similar. ASE is more secure, private, and costs more though. It's isolated. 
+
+You can use private endpoints to connect AKS to your VNet. You can also use more security so the clusters will use internal IPs only. 
+
+Azure Kubenet is basic networking and Azure Container Networking Interface (CNI) is advanced networking. With Kubenet, each node receives an IP address. With CNI, each pod inside each node receives an IP address. You need enough IPs for CNI obviously. 
+
+
+
+
 
 ## 09.30.2025
 **Today's Topic**
