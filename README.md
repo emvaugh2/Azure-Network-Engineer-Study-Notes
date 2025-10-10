@@ -2,6 +2,14 @@
 
 **I'm going to also publicly document my notes for the Azure Network Engineer certification (AZ-700) exam. I'm currently applying for cloud engineer roles so I think this will augment my skills in the meantime. I definitely want to take this exam but I'll probably do that after I actually get the job.**
 
+## 10.10.2025
+**Today's Topic**
+* AZ-700 - Implement a Azure Front Door
+________________________
+
+This is just a test to make sure VS Code is pushing to this repo correctly. I'm also going to start studying for the AZ-700 openly here so I'll probably document that after I finish the Azure Front Door section of the course. 
+
+
 ## 10.02.2025
 **Today's Topic**
 * AZ-700 - Implement a Web Application Firewall (WAF) Deployment
